@@ -12,6 +12,23 @@ d_target = dd['Outcome'].to_numpy()
 
 x_train, x_test, y_train, y_test = train_test_split(d_input,d_target,train_size=0.7)
 
+param_grid = {'max_iter': [100,200,300,400,500,600],
+             'eta0': [0.001, 0.01, 0.1, 1, 10, 100]}
+
+p = Perceptron()
+
+grid_search = GridSearchCV(p, param_grid, cv=5, return_train_score=True)
+
+grid_search.fit(x_train, y_train)
+
+print(grid_search.best_params_)
+
+ss = StandardScaler()
+ss.fit(x_train)
+
+x_train = ss.transform(x_train)
+x_test = ss.transform(x_test)
+
 p = Perceptron(max_iter=100, eta0=0.001, verbose=0)
 p.fit(x_train,y_train)
 res = p.predict(x_test)
