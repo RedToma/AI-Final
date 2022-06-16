@@ -29,7 +29,7 @@ ss.fit(x_train)
 x_train = ss.transform(x_train)
 x_test = ss.transform(x_test)
 
-s = SVC(gamma=0.001, C=1, kernel='linear')
+s = SVC(gamma=0.001, C=10, kernel='rbf')
 
 s.fit(x_train,y_train)
 res = s.predict(x_test)
